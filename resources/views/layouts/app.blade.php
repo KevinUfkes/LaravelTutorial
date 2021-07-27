@@ -22,18 +22,26 @@
             </li>
         </ul>
         <ul class="flex items-center">
-            <li>
-                <a href="" class="p-3">Kevin Ufkes</a>
-            </li>
-            <li>
-                <a href="" class="p-3">Login</a>
-            </li>
-            <li>
-                <a href="" class="p-3">Register</a>
-            </li>
-            <li>
-                <a href="" class="p-3">Logout</a>
-            </li>
+            @auth
+                <li>
+                    <a href="" class="p-3">Kevin Ufkes</a>
+                </li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit">Logout</a>
+                    </form>
+                    
+                </li>
+            @endauth
+            @guest
+                <li>
+                    <a href="{{ route('login') }}" class="p-3">Login</a>
+                </li>
+                <li>
+                    <a href="{{ route('register') }}" class="p-3">Register</a>
+                </li>
+            @endguest
         </ul>
     </nav>
     @yield('content')
