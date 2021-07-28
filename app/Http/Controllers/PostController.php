@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index(){
         // $posts = Post::get(); // returns all posts in natural database order as Laravel Collection
-        $posts = Post::paginate(2);  // returns LengthAwarePaginator
+        $posts = Post::paginate(15);  // returns LengthAwarePaginator
 
         return view('posts.index', [
             'posts' => $posts
