@@ -7,6 +7,10 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    public function __contstruct(){
+        $this->middleware(['auth'])->only(['store', 'destroy']);
+    }
+
     public function index(){
         // $posts = Post::get(); // returns all posts in natural database order as Laravel Collection
         $posts = Post::orderBy('created_at', 'desc')->with(['user','likes'])->paginate(15);  // returns LengthAwarePaginator
