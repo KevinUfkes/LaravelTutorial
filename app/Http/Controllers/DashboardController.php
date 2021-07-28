@@ -14,7 +14,8 @@ class DashboardController extends Controller
 
     public function index(){
 
-        // dd(Post::find(4)->created_at);
+        $user = auth()->user();
+
         return view('dashboard');
     }
 }
