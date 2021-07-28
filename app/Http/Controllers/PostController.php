@@ -8,7 +8,8 @@ use App\Models\Post;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get(); // returns all posts in natural database order as Laravel Collection
+        // $posts = Post::get(); // returns all posts in natural database order as Laravel Collection
+        $posts = Post::paginate(2);  // returns LengthAwarePaginator
 
         return view('posts.index', [
             'posts' => $posts
