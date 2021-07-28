@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index(){
         // $posts = Post::get(); // returns all posts in natural database order as Laravel Collection
-        $posts = Post::paginate(15);  // returns LengthAwarePaginator
+        $posts = Post::orderBy('created_at', 'desc')->with(['user','likes'])->paginate(15);  // returns LengthAwarePaginator
 
         return view('posts.index', [
             'posts' => $posts
@@ -34,6 +34,19 @@ class PostController extends Controller
 
         // Different syntax to accomplish the previous
         $request->user()->posts()->create($request->only('body'));
+
+        return back();
+    }
+
+    public function destroy(Post $post){
+
+        // To be done with PostPolicy
+        // if(!$post->ownedBy(auth()->user())){
+        //     dd('no');
+        // }
+        
+        $this->authorize('delete', $post);
+        $post->delete();
 
         return back();
     }

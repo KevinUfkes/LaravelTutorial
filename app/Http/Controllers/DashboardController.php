@@ -14,7 +14,7 @@ class DashboardController extends Controller
 
     public function index(){
 
-        dd(Post::find(4)->created_at);
+        // dd(Post::find(4)->created_at);
         return view('dashboard');
     }
 }
